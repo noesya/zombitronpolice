@@ -14,6 +14,11 @@ app.get('/shader', function (req, res) {
   res.sendFile(__dirname + '/shader.html');
 });
 
+
+app.get('/sound', function (req, res) {
+  res.sendFile(__dirname + '/sound.html');
+});
+
 io.on('connection', (socket) => {
 
   socket.on('motion', (touch) => {

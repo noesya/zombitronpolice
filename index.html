@@ -33,7 +33,7 @@
 </head>
 <body>
   <div class="touch">
-    <h1>Touch me</h1>
+    <h1>Swipe</h1>
   </div>
 </body>
 </html>
@@ -44,7 +44,11 @@
   window.addEventListener("touchmove", (event) => {
     socket.emit('motion', {
       x: event.touches[0].clientX,
-      y: event.touches[0].clientY
+      y: event.touches[0].clientY,
+      ratio: {
+        x: event.touches[0].clientX / window.innerWidth,
+        y: event.touches[0].clientY / window.innerHeight,
+      }
     });
   });
 
