@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #ball {
+      background: red;
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      margin: -20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="ball"></div>
+  <p id="message"></p>
+  <input type="text">
+</body>
+</html>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+  window.addEventListener("touchmove", (event) => {
+    socket.emit('motion', {
+      x: event.touches[0].clientX,
+      y: event.touches[0].clientY
+    });
+  });
+
+  window.addEventListener("devicemotion", (event) => {
+    console.log(event);
+  });
+
+  socket.on('reception', (data) => {
+    document.getElementById('ball').style.left = data.x+ 'px';
+    document.getElementById('ball').style.top = data.y+ 'px';
+  });
+
+</script>
