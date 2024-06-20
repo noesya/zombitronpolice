@@ -10,6 +10,10 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/shader', function (req, res) {
+  res.sendFile(__dirname + '/shader.html');
+});
+
 io.on('connection', (socket) => {
 
   socket.on('motion', (touch) => {
@@ -19,5 +23,5 @@ io.on('connection', (socket) => {
 });
 
 server.listen(3000, () => {
-  console.log('listening on *:8080');
+  console.log('listening on *:3000');
 });

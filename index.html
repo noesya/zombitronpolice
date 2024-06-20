@@ -15,9 +15,7 @@
   </style>
 </head>
 <body>
-  <div id="ball"></div>
-  <p id="message"></p>
-  <input type="text">
+  <h1>Controller</h1>
 </body>
 </html>
 
@@ -33,11 +31,6 @@
 
   window.addEventListener("devicemotion", (event) => {
     console.log(event);
-  });
-
-  socket.on('reception', (data) => {
-    document.getElementById('ball').style.left = data.x+ 'px';
-    document.getElementById('ball').style.top = data.y+ 'px';
   });
 
 </script>
