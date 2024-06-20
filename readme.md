@@ -10,3 +10,6 @@
   - l'image :[ZOMBITRON_SERVEUR_IP]/shader
   - l'audio :[ZOMBITRON_SERVEUR_IP]/sound
 
+## Pour se connecter depuis son ordi au zombitron serveur : 
+
+Dans un terminal : `ssh [ZOMBITRON_SERVEUR_IP] -p 8022`
