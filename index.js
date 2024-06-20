@@ -20,8 +20,8 @@ app.get('/sound', function (req, res) {
 });
 
 io.on('connection', (socket) => {
-
   socket.on('motion', (touch) => {
+    console.log(touch.ratio.x)
     io.emit('reception', touch);
   });
 
