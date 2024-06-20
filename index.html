@@ -12,10 +12,29 @@
       height: 40px;
       margin: -20px;
     }
+    body {
+      background: black;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      color: white;
+      font: 1em sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    h1 {
+      user-select: none;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
-  <h1>Controller</h1>
+  <div class="touch">
+    <h1>Touch me</h1>
+  </div>
 </body>
 </html>
 
