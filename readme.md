@@ -22,7 +22,7 @@ Il faut jouer avec.
 ![Sliders](images/slide.png?raw=true "Sliders")
 
 ### le traquePad > `http://[ZOMBITRON_SERVEUR_IP]/position`
-et le traquepad qui ajoute une delicatesse au tout avec sa jolie gamme pantatonique
+et le traquepad qui ajoute une delicatesse au tout avec sa jolie gamme pentatonique
 ![Traquepad](images/traque.png?raw=true "Traquepad")
 
 ## Setup serveur
@@ -38,7 +38,7 @@ et le traquepad qui ajoute une delicatesse au tout avec sa jolie gamme pantatoni
   ```
 5. Rentrer dans le dossier, installer les dépendances
   ```
-  cd zombitron.web
+  cd zombitron.web.music
   yarn install
   ```
 6. Lancer le serveur
