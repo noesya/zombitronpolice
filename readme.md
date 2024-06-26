@@ -38,7 +38,7 @@ et le traquepad qui ajoute une delicatesse au tout avec sa jolie gamme pentatoni
   ```
 5. Rentrer dans le dossier, installer les dépendances
   ```
-  cd zombitron.web.music
+  cd zombitronica
   yarn install
   ```
 6. Lancer le serveur
