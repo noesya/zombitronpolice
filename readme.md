@@ -1,4 +1,4 @@
-# Zoumbizoumba - version musicale du Zombitron 
+# Zombitronica - Un Zombitron musical 
 (details pour setup le serveur en dessous)
 
 ##  Detail des instruments
