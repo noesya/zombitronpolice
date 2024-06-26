@@ -34,7 +34,7 @@ et le traquepad qui ajoute une delicatesse au tout avec sa jolie gamme pentatoni
   ```
 4. Cloner le repo
   ```
-  git clone https://github.com/noesya/zombitron.web
+  git clone https://github.com/noesya/zombitronica
   ```
 5. Rentrer dans le dossier, installer les dépendances
   ```
