@@ -20,6 +20,8 @@ for (const name of Object.keys(nets)) {
   }
 }
 
+app.use('/scripts', express.static(__dirname + '/node_modules'));
+
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
 });
@@ -28,15 +30,50 @@ app.get('/shader', function (req, res) {
   res.sendFile(__dirname + '/shader.html');
 });
 
-
 app.get('/sound', function (req, res) {
   res.sendFile(__dirname + '/sound.html');
+});
+
+app.get('/slider', function (req, res) {
+  res.sendFile(__dirname + '/slider.html');
+});
+
+app.get('/sequencer', function (req, res) {
+  res.sendFile(__dirname + '/sequencer.html');
+});
+
+app.get('/position', function (req, res) {
+  res.sendFile(__dirname + '/position.html');
+});
+
+app.get('/controller', function (req, res) {
+  res.sendFile(__dirname + '/controller.html');
 });
 
 io.on('connection', (socket) => {
   socket.on('motion', (touch) => {
     console.log(touch.ratio.x)
     io.emit('reception', touch);
+  });
+
+  socket.on('slider', (v) => {
+    io.emit('slider', v);
+  });
+
+  socket.on('position', (v) => {
+    io.emit('position', v);
+  });
+
+    socket.on('dial1', (v) => {
+    io.emit('dial1', v);
+  });
+
+  socket.on('dial2', (v) => {
+    io.emit('dial2', v);
+  });
+
+  socket.on('dial3', (v) => {
+    io.emit('dial3', v);
   });
 });
 

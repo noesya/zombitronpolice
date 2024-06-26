@@ -1,7 +1,31 @@
 # Zombitron virus, version web
+(details pour setup le serveur en dessous)
+
+##  Zoumbizoumba - version musicale du Zombitron 
+
+### le sequenceur > `http://[ZOMBITRON_SERVEUR_IP]/sequencer`
+4 instruments peuvent etre joués en sequence sur 8 temps
+il faut appuyer sur play pour le demarrer, et à nouveau sur play pour le mettre en pause
+![sequencer](images/sequencer.png?raw=true "Sequenceur")
+
+### le controlleur >  `http://[ZOMBITRON_SERVEUR_IP]/controller`
+Le controlleur affiche trois jauges permettant de controller le son issu du sequenceur
+( de gauche a droite): 
+- le nombre de BPM du sequenceur
+- distowrzz
+- reverb erb  erb   erb 
+![Controlleur](images/control.png?raw=true "Controlleur")
+
+### les effets > `http://[ZOMBITRON_SERVEUR_IP]/slider`
+4 sliders permettent de modifier une composante des instruments du sequenceur 
+Il faut jouer avec.
+![Sliders](images/slide.png?raw=true "Sliders")
+
+### le traquePad > `http://[ZOMBITRON_SERVEUR_IP]/position`
+et le traquepad qui ajoute une delicatesse au tout avec sa jolie gamme pantatonique
+![Traquepad](images/traque.png?raw=true "Traquepad")
 
 ## Setup serveur
-
 1. Choisir un vieil Android pour le transformer en serveur-zombitron.
 2. Installer [Termux](https://play.google.com/store/apps/details?id=com.termux) sur l'appareil
 3. Lancer Termux et installer node, git et yarn
