@@ -1,7 +1,7 @@
-# Zombitron virus, version web
+# Zoumbizoumba - version musicale du Zombitron 
 (details pour setup le serveur en dessous)
 
-##  Zoumbizoumba - version musicale du Zombitron 
+##  Detail des instruments
 
 ### le sequenceur > `http://[ZOMBITRON_SERVEUR_IP]/sequencer`
 4 instruments peuvent etre joués en sequence sur 8 temps
