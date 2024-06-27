@@ -23,15 +23,7 @@ for (const name of Object.keys(nets)) {
 app.use('/scripts', express.static(__dirname + '/node_modules'));
 
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/index.html');
-});
-
-app.get('/shader', function (req, res) {
-  res.sendFile(__dirname + '/shader.html');
-});
-
-app.get('/sound', function (req, res) {
-  res.sendFile(__dirname + '/sound.html');
+  res.sendFile(__dirname + '/music.html');
 });
 
 app.get('/slider', function (req, res) {
@@ -51,11 +43,6 @@ app.get('/controller', function (req, res) {
 });
 
 io.on('connection', (socket) => {
-  socket.on('motion', (touch) => {
-    console.log(touch.ratio.x)
-    io.emit('reception', touch);
-  });
-
   socket.on('slider', (v) => {
     io.emit('slider', v);
   });
@@ -74,6 +61,10 @@ io.on('connection', (socket) => {
 
   socket.on('dial3', (v) => {
     io.emit('dial3', v);
+  });
+
+  socket.on('sequencer', (v) => {
+    io.emit('sequencer', v);
   });
 });
 
