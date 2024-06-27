@@ -1,7 +1,7 @@
-# Zombitron virus, version web
+# Zombitronica - Un Zombitron musical 
 (details pour setup le serveur en dessous)
 
-##  Zoumbizoumba - version musicale du Zombitron 
+##  Detail des instruments
 
 ### le sequenceur > `http://[ZOMBITRON_SERVEUR_IP]/sequencer`
 4 instruments peuvent etre joués en sequence sur 8 temps
@@ -22,7 +22,7 @@ Il faut jouer avec.
 ![Sliders](images/slide.png?raw=true "Sliders")
 
 ### le traquePad > `http://[ZOMBITRON_SERVEUR_IP]/position`
-et le traquepad qui ajoute une delicatesse au tout avec sa jolie gamme pantatonique
+et le traquepad qui ajoute une delicatesse au tout avec sa jolie gamme pentatonique
 ![Traquepad](images/traque.png?raw=true "Traquepad")
 
 ## Setup serveur
@@ -34,11 +34,11 @@ et le traquepad qui ajoute une delicatesse au tout avec sa jolie gamme pantatoni
   ```
 4. Cloner le repo
   ```
-  git clone https://github.com/noesya/zombitron.web
+  git clone https://github.com/noesya/zombitronica
   ```
 5. Rentrer dans le dossier, installer les dépendances
   ```
-  cd zombitron.web
+  cd zombitronica
   yarn install
   ```
 6. Lancer le serveur
