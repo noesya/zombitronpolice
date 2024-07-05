@@ -23,6 +23,7 @@ for (const name of Object.keys(nets)) {
 }
 
 app.use('/scripts', express.static(__dirname + '/node_modules'));
+app.use('/fonts', express.static(__dirname + '/fonts'));
 
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
@@ -53,7 +54,7 @@ io.on('connection', (socket) => {
     io.emit('position', v);
   });
 
-    socket.on('dial1', (v) => {
+  socket.on('dial1', (v) => {
     io.emit('dial1', v);
   });
 
@@ -63,6 +64,14 @@ io.on('connection', (socket) => {
 
   socket.on('dial3', (v) => {
     io.emit('dial3', v);
+  });
+
+  socket.on('dial4', (v) => {
+    io.emit('dial4', v);
+  });
+
+  socket.on('dial5', (v) => {
+    io.emit('dial5', v);
   });
 
   socket.on('sequencer', (v) => {
