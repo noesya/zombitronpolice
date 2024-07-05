@@ -44,6 +44,10 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/testorientation', function (req, res) {
+  res.sendFile(__dirname + '/testorientation.html');
+});
+
 app.get('/slider', function (req, res) {
   res.sendFile(__dirname + '/slider.html');
 });
