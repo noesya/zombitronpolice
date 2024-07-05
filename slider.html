@@ -35,6 +35,9 @@
 <script src="/socket.io/socket.io.js"></script>
 
 <script>
+        try {
+        document.requestFullscreen();
+    } catch (e) {}
     var multislider = new Nexus.Multislider('#content', {
         'size': [600, 300],
         'numberOfSliders': 4,

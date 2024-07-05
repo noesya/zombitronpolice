@@ -17,7 +17,7 @@
             font: 1em sans-serif;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             overflow: hidden;
         }
 
@@ -29,15 +29,18 @@
 </head>
 
 <body>
-    <div id="content">
+    
 
-    </div>
-    <div id="content2">
-
-    </div>
-    <div id="content3">
-
-    </div>
+        <div id="content">
+            
+        </div>
+        <div id="content2">
+            
+        </div>
+        <div id="content3">
+            
+        </div>
+    
 </body>
 
 </html>
@@ -45,9 +48,8 @@
 <script src="/scripts/nexusui/dist/NexusUI.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script>
-
     let dial1 = new Nexus.Dial('#content', {
-        'size': [75, 75],
+        'size': [200, 200],
         'interaction': 'radial', // "radial", "vertical", or "horizontal"
         'mode': 'relative', // "absolute" or "relative"
         'min': 0,
@@ -57,7 +59,7 @@
     });
 
     let dial2 = new Nexus.Dial('#content2', {
-        'size': [75, 75],
+        'size': [200, 200],
         'interaction': 'radial', // "radial", "vertical", or "horizontal"
         'mode': 'relative', // "absolute" or "relative"
         'min': 0,
@@ -66,7 +68,7 @@
         'value': 0
     });
     let dial3 = new Nexus.Dial('#content3', {
-        'size': [75, 75],
+        'size': [200, 200],
         'interaction': 'radial', // "radial", "vertical", or "horizontal"
         'mode': 'relative', // "absolute" or "relative"
         'min': 0,
