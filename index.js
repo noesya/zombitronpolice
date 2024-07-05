@@ -1,9 +1,11 @@
 const { networkInterfaces, hostname } = require('os');
+
 const port = 3000;
 const express = require('express')
 const app = express()
 const http = require('http');
 const server = http.createServer(app);
+
 const { Server } = require("socket.io");
 const io = new Server(server);
 
@@ -23,7 +25,7 @@ for (const name of Object.keys(nets)) {
 app.use('/scripts', express.static(__dirname + '/node_modules'));
 
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/music.html');
+  res.sendFile(__dirname + '/index.html');
 });
 
 app.get('/slider', function (req, res) {
