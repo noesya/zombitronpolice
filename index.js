@@ -1,10 +1,19 @@
 const { networkInterfaces, hostname } = require('os');
 
 const port = 3000;
-const express = require('express')
-const app = express()
-const http = require('http');
-const server = http.createServer(app);
+
+const https = require('https');
+const fs = require('fs');
+
+const options = {
+  key: fs.readFileSync('selfsigned.key'),
+  cert: fs.readFileSync('selfsigned.crt')
+};
+
+const express = require('express');
+var app = express();
+
+const server = https.createServer(options, app);
 
 const { Server } = require("socket.io");
 const io = new Server(server);
@@ -22,6 +31,12 @@ for (const name of Object.keys(nets)) {
   }
 }
 
+// const WebSocket = require('ws'); // tester le ws natif pour les vieux tels... 
+// const socket = new WebSocket.Server({port: 3300});
+// socket.on('connection', (ws) => {
+//   console.log("new connection")
+// });
+
 app.use('/scripts', express.static(__dirname + '/node_modules'));
 
 app.get('/', function (req, res) {
@@ -30,6 +45,14 @@ app.get('/', function (req, res) {
 
 app.get('/slider', function (req, res) {
   res.sendFile(__dirname + '/slider.html');
+});
+
+app.get('/deviceorientation', function (req, res) {
+  res.sendFile(__dirname + '/deviceorientation.html');
+});
+
+app.get('/devicemotion', function (req, res) {
+  res.sendFile(__dirname + '/devicemotion.html');
 });
 
 app.get('/sequencer', function (req, res) {
@@ -68,11 +91,31 @@ io.on('connection', (socket) => {
   socket.on('sequencer', (v) => {
     io.emit('sequencer', v);
   });
+
+  socket.on('touche', (v) => {
+    // io.emit('sequencer', v);
+    console.log(v)
+  });
+
+  socket.on('acceleration', (v) => {
+    io.emit('acceleration', v);
+  });
+
+  socket.on('rotationrate', (v) => { // vitesse de rotation angulaire 
+    const p = {alpha: Math.round(v.alpha), beta: Math.round(v.beta), gamma:  Math.round(v.gamma) }
+    io.emit('rotationrate', p);
+  });
+
+  socket.on('orientation', (v) => { // orientation
+    console.log(v)
+    // const p = {alpha: Math.round(v.alpha), beta: Math.round(v.beta), gamma:  Math.round(v.gamma) }
+    io.emit('orientation', v);
+  });
 });
 
 server.listen(port, () => {
   console.log(`listening on:`);
   hostnames.forEach(hostname => {
-    console.log(`- http://${hostname}:${port}`);
+    console.log(`- https://${hostname}:${port}`);
   })
 });
