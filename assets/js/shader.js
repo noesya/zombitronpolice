@@ -5,7 +5,7 @@ var startTime, elapsed;
 if (canvas) {
   canvas.forEach((c) => {
     var title = c.getAttribute('value');
-    var path = '/assets/glsl/shader.vert.js';
+    var path = '/assets/js/glsl/shader.vert.js';
     try{
       import(path).then((e)=>{
         setup(e.vertex, e.fragment,c);
