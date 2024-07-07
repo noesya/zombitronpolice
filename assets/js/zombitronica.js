@@ -1,6 +1,26 @@
 let zombitronica = {
     initialized: false,
     playing: false,
+    bpm: {
+        min: 80,
+        max: 200,
+        default: 100
+    },
+    distortion: {
+        min: 0,
+        max: 1,
+        default: 0
+    },
+    highpass: {
+        min: 0,
+        max: 10000,
+        default: 0
+    },
+    lowpass: {
+        min: 0,
+        max: 20000,
+        default: 20000
+    },
     sequencer: {
         matrix: [
             [1, 1, 1, 1, 1, 1, 1, 1],
@@ -15,27 +35,44 @@ let zombitronica = {
             this.initialize();
         }
         Tone.getTransport().start();
+        document.body.classList.add("started");
         this.playing = true;
+        console.log("Zombitronica start");
     },
 
     stop: function () {
         Tone.getTransport().stop();
+        document.body.classList.remove("started");
         this.playing = false;
+        console.log("Zombitronica stop");
     },
 
     initialize: function () {
-        console.log("initialize Zombitronica");
-
-        Tone.getTransport().start();
-        Tone.getTransport().bpm.value = 90;
-
+        console.log("Zombitronica initializing");
+        this.initializeTone();
         this.initializeFilters();
+        this.initializePosition();
+        this.initializeKeyboard();
+        this.initializeSequencer();
+        this.initializeSocket();
+        this.initialized = true;
+    },
 
-        // this.initialize
+    initializeTone: function () {
+        Tone.getTransport().start();
+        Tone.getTransport().bpm.value = this.bpm.default;
+    },
 
-        this.cool = new Tone.DuoSynth({
+    initializeFilters: function () {
+        this.gain = new Tone.Gain(0.5).toDestination()
+        this.lowpass.instance = new Tone.Filter(this.lowpass.default, "lowpass").toDestination();
+        this.highpass.instance = new Tone.Filter(this.highpass.default, "highpass").chain(this.lowpass.instance);
+        this.distortion.instance = new Tone.Distortion(this.distortion.default).toDestination();
+    },
+
+    initializePosition: function () {
+        this.position = new Tone.DuoSynth({
             "volume": -8,
-            "detune": 3,
             "portamento": 0.3,
             "vibratoAmount": 0.5,
             "vibratoRate": 5,
@@ -119,68 +156,36 @@ let zombitronica = {
                 }
             }
         }).chain(this.gain);
+    },
 
-        this.monotron = new Tone.FMSynth({
-            "volume": -15,
-            "detune": 1,
-            "portamento": 1,
-            "harmonicity": 4,
+    initializeKeyboard: function () {
+        this.keyboard = new Tone.MonoSynth({
             "oscillator": {
-                "partialCount": 0,
-                "partials": [],
-                "phase": 0,
-                "type": "sine"
+                "type": "fmsquare5",
+                "modulationType" : "triangle",
+                  "modulationIndex" : 2,
+                  "harmonicity" : 0.501
+            },
+            "filter": {
+                "Q": 1,
+                "type": "lowpass",
+                "rolloff": -24
             },
             "envelope": {
                 "attack": 0.01,
-                "attackCurve": "linear",
-                "decay": 0.2,
-                "decayCurve": "exponential",
-                "release": 0.5,
-                "releaseCurve": "exponential",
-                "sustain": 1
+                "decay": 0.1,
+                "sustain": 0.4,
+                "release": 2
             },
-            "modulation": {
-                "partialCount": 0,
-                "partials": [],
-                "phase": 0,
-                "type": "sine"
-            },
-            "modulationEnvelope": {
-                "attack": 0.1,
-                "attackCurve": "linear",
-                "decay": 0.0001,
-                "decayCurve": "exponential",
+            "filterEnvelope": {
+                "attack": 0.01,
+                "decay": 0.1,
+                "sustain": 0.8,
                 "release": 1.5,
-                "releaseCurve": "exponential",
-                "sustain": 1
-            },
-            "modulationIndex": 152.22
-        }).toDestination();
-
-        this.coolpitch = "B2";
-        this.cool.triggerAttack(this.coolpitch);
-
-        this.initializeSequencer();
-        this.initializeSocket();
-        this.initialized = true;
-    },
-
-    initializeFilters: function () {
-        this.gain = new Tone.Gain(0).toDestination()
-
-        this.lowpass = new Tone.Filter(2000, "lowpass").toDestination();
-
-        this.delay = new Tone.Reverb({
-            "wet": 0.0,
-            "decay": 1.5,
-            "preDelay": 0.001
-        }).chain(this.lowpass);
-
-        this.distortion = new Tone.Distortion({
-            distortion: 0.0,
-            wet: 0.8
-        }).chain(this.lowpass);
+                "baseFrequency": 50,
+                "octaves": 4.4
+            }
+        }).connect(this.distortion.instance);
     },
 
     initializeSequencer: function () {
@@ -197,38 +202,84 @@ let zombitronica = {
             },
             release: 1,
             baseUrl: "/assets/sounds/",
-        }).toDestination();
+        }).chain(this.highpass.instance);
+        
+        Tone.loaded().then(() => {
+            // Le loop est le moteur du séquenceur
+            this.sequencer.loop = new Tone.Loop((time) => {
+                this.sequencer.playSounds(time);
+                this.sequencer.step = (this.sequencer.step + 1) % 8;
+            }, "8n").start(0);
 
-        // Le loop est le moteur du séquenceur
-        this.sequencer.loop = new Tone.Loop((time) => {
-            this.sequencer.playSounds(time);
-            this.sequencer.step = (this.sequencer.step + 1) % 8;
-        }, "16n").start(0);
-
-        // La fonction qui joue les sons selon l'état de la matrice
-        this.sequencer.playSounds = function (time) {
-            if (this.matrix[0][this.step] == 1) {
-                let notes = []
-            }
-            for (let i = 0; i < this.matrix.length; i++) {
-                let note = "player" + i
-                let active = this.matrix[i][this.step] == 1;
-                if (active) {
-                    this.players.player(note).start(time);
+            // La fonction qui joue les sons selon l'état de la matrice
+            this.sequencer.playSounds = function (time) {
+                if (this.matrix[0][this.step] == 1) {
+                    let notes = []
+                }
+                for (let i = 0; i < this.matrix.length; i++) {
+                    let note = "player" + i
+                    let active = this.matrix[i][this.step] == 1;
+                    if (active) {
+                        this.players.player(note).start(time);
+                    }
                 }
             }
-        }
+        });
+    
     },
 
     initializeSocket: function () {
         this.socket = io();
 
-        this.socket.on('sequencer', (detail) => {
-            let value = detail.state ? 1 : 0;
-            this.sequencer.matrix[detail.row][detail.column] = value;
+        this.socket.on('sequencer', (data) => {
+            let value = data.state ? 1 : 0;
+            this.sequencer.matrix[data.row][data.column] = value;
         });
-    }
 
+        this.socket.on('position', (data) => {
+            this.gain.gain.rampTo(data.y, 0.1); 
+            const range = ['A1', 'C2' , 'D2' , 'E2' , 'G2', 'A2', 'C3' , 'D3' , 'E3' , 'G3', 'A4']
+            let newpitch = range[parseInt(data.x*10)]
+            if ( this.positionpitch != newpitch) {
+                this.position.triggerAttack(newpitch);
+                this.positionpitch = newpitch;
+            }
+        });
+
+        this.socket.on('controller1', (data) => {
+            Tone.Transport.bpm.rampTo(data, 2);
+        });
+        
+        this.socket.on('controller2', (data) => {
+            this.distortion.instance.distortion = data;
+        });
+
+        this.socket.on('controller3', (data) => {
+            this.highpass.instance.frequency.rampTo(data, 0.5);
+        });
+
+        this.socket.on('controller4', (data) => {
+            this.lowpass.instance.frequency.rampTo(data, 0.5);
+        });
+
+        this.socket.on('keyboard', (data) => {
+            let note = Tone.Frequency(data.note, "midi").toNote();
+            if (data.state === true) {
+                this.keyboard.triggerAttack(note, Tone.now());
+            } else {
+                this.keyboard.triggerRelease();
+            }
+        });
+    },
+
+    updatePitch: function(index, pitch) { // pitch = note style C4
+        for (let i = 0; i < synths[index].sequence.length; i++) {
+            if (synths[index].sequence.events[i]) {
+                synths[index].sequence.events[i] = pitch
+            }
+        }
+        synths[index].note = pitch
+    }
 }
 
 document.querySelector("#start")?.addEventListener("click", async () => {
@@ -236,55 +287,6 @@ document.querySelector("#start")?.addEventListener("click", async () => {
     zombitronica.start();
 })
 
-/*
-function updatePitch(index, pitch) { // pitch = note style C4
-    for (let i = 0; i < synths[index].sequence.length; i++) {
-        if (synths[index].sequence.events[i]) {
-            synths[index].sequence.events[i] = pitch
-        }
-    }
-    synths[index].note = pitch
-}
-
-const socket = io();
-
-socket.on('position', (data) => {
-    gain.gain.rampTo(data.y, 0.1); 
-    const gam = ['A1', 'C2' , 'D2' , 'E2' , 'G2', 'A2', 'C3' , 'D3' , 'E3' , 'G3', 'A4']
-    let newpitch = gam[parseInt(data.x*10)]
-    if ( coolpitch != newpitch) {
-        cool.triggerAttack(newpitch);
-        coolpitch = newpitch;
-    }
-});
-
-socket.on('dial1', (data) => {
-    //  bpm
-    Tone.Transport.bpm.value = data * 200 + 60;
-});
-
-socket.on('dial2', (data) => {
-    distortion.distortion= data*2.0;
-});
-
-socket.on('dial3', (data) => {
-    delay.wet.value = data 
-});
-
-socket.on('slider', (data) => {
-    // slider 1 - kick pitchdecay
-    let val = ((1 / (0.01 + data[0] / 8))).toString() + "hz"
-    synths[0].synth.pitchDecay = val
-
-    // slider 2 - snare harmony
-    synths[1].synth.harmonicity = data[1] * 9 + 0.1
-
-    // slider 3 -
-    let p = synths[2].synth.oscillator.partials
-    p[3] = data[2] * 2
-    synths[2].synth.oscillator.partials = p
-
-    // slider 4 - pitch 
-    updatePitch(3, Tone.Frequency(data[3] * 50.0 + 20, "midi").toNote())
-});
-*/
+document.querySelector("#stop")?.addEventListener("click", ()  => {
+    zombitronica.stop();
+})

@@ -13,7 +13,39 @@ body {
   overflow: hidden;
 }
 
-#start {
-  padding: 10px;
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.zombitronica__index {
+  text-align: center;
+}
+
+.zombitronica__index a {
+  background: #f25138;
+  border-radius: 5px;
+  padding: 20px 30px;
+  display: inline-block;
+  margin: 10px
+}
+
+.zombitronica__index #start, 
+.zombitronica__index #stop {
+  display: block;
   font-size: 50px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.zombitronica__index #stop {
+  display: none;
+}
+
+.zombitronica__index.started #start {
+  display: none;
+}
+
+.zombitronica__index.started #stop {
+  display: block;
 }

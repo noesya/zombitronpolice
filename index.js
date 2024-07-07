@@ -24,11 +24,11 @@ app.use('/scripts', express.static(__dirname + '/node_modules'));
 app.use('/assets', express.static(__dirname + '/assets'));
 
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/views/music.html');
+  res.sendFile(__dirname + '/views/index.html');
 });
 
-app.get('/slider', function (req, res) {
-  res.sendFile(__dirname + '/views/slider.html');
+app.get('/keyboard', function (req, res) {
+  res.sendFile(__dirname + '/views/keyboard.html');
 });
 
 app.get('/sequencer', function (req, res) {
@@ -44,28 +44,26 @@ app.get('/controller', function (req, res) {
 });
 
 io.on('connection', (socket) => {
-  socket.on('slider', (v) => {
-    io.emit('slider', v);
+  socket.on('sequencer', (data) => {
+    io.emit('sequencer', data);
   });
-
-  socket.on('position', (v) => {
-    io.emit('position', v);
+  socket.on('keyboard', (data) => {
+    io.emit('keyboard', data);
   });
-
-    socket.on('dial1', (v) => {
-    io.emit('dial1', v);
+  socket.on('controller1', (data) => {
+    io.emit('controller1', data);
   });
-
-  socket.on('dial2', (v) => {
-    io.emit('dial2', v);
+  socket.on('controller2', (data) => {
+    io.emit('controller2', data);
   });
-
-  socket.on('dial3', (v) => {
-    io.emit('dial3', v);
+  socket.on('controller3', (data) => {
+    io.emit('controller3', data);
   });
-
-  socket.on('sequencer', (v) => {
-    io.emit('sequencer', v);
+  socket.on('controller4', (data) => {
+    io.emit('controller4', data);
+  });
+  socket.on('position', (data) => {
+    io.emit('position', data);
   });
 });
 

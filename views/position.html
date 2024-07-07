@@ -1,66 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {
-            background: black;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            color: white;
-            font: 1em sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        h1 {
-            user-select: none;
-            pointer-events: none;
-        }
-    </style>
-</head>
-
-<body>
-    <div id="content"></div>
-</body>
-
+<html lang="fr">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Position</title>
+      <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+  </head>
+  <body>
+      <div id="content"></div>
+      <script type="text/javascript" src="scripts/nexusui/dist/NexusUI.js"></script>
+      <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+      <script type="text/javascript" src="/assets/js/ui/position.js"></script>  
+  </body>
 </html>
-
-
-<script src="/scripts/nexusui/dist/NexusUI.js"></script>
-<script src="/socket.io/socket.io.js"></script>
-<script>
-
-    let position = new Nexus.Position('#content', {
-        'size': [300, 300],
-        'mode': 'absolute',  // "absolute" or "relative"
-        'x': 0.5,  // initial x value
-        'minX': 0,
-        'maxX': 1,
-        'stepX': 0,
-        'y': 0,  // initial y value
-        'minY': 0,
-        'maxY': 1,
-        'stepY': 0
-    }
-    );
-
-    const socket = io();
-
-    position.on('change', function (v) {
-        socket.emit('position', v)
-    })
-
-    window.addEventListener("devicemotion", (event) => {
-        console.log(event);
-    });
-
-</script>
