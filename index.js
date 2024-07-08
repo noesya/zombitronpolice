@@ -101,6 +101,10 @@ io.on('connection', (socket) => {
     io.emit('dial5', v);
   });
 
+  socket.on('dial-motion', (data) => {
+    io.emit('dial-motion', data);
+  });
+
   socket.on('sequencer', (v) => {
     io.emit('sequencer', v);
   });

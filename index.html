@@ -78,7 +78,11 @@
 
     socket.on('dial5', (data) => {
         console.log('c le contrôleur 5', data)
-        text.style.fontSize = data + 'rem';
+        text
+        .style.fontSize = data + 'rem';
     });
 
+    socket.on('dial-motion', (data) => {
+        text.style.transform = 'skewX(' + data.alpha + 'deg) skewY(' + data.beta + 'deg)';
+    });
 </script>

@@ -10,9 +10,17 @@ Capteur de mouvement
 - Orientation // demo ici => `https://[ZOMBITRON_SERVEUR_IP]/deviceorientation`
 
 ## Spécificité pour l'ajout de la gestion des capteurs: 
+
+
 Generer un certificat  https: 
-sudo openssl req -x509 -nodes -days 365 -newkey rsa:4096 -keyout selfsigned.key -out selfsigned.crt
+`sudo openssl req -x509 -nodes -days 365 -newkey rsa:4096 -keyout selfsigned.key -out selfsigned.crt`
 à placer à la racine du code. 
+
+Il faut changer le mode de permission des fichiers générés : 
+```
+  sudo chmod 755 selfsigned.crt
+  sudo chmod 755 selfsigned.key
+```
 
 IPHONE 
 Parfois : il faut activer la motion dans les parametres du telephone > safari
