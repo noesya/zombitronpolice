@@ -5,9 +5,11 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.19.2",
+    "nexusui": "^2.1.6",
     "socket.io": "^4.7.5"
   },
   "scripts": {
-    "start": "node index.js"
+    "zombitronica1": "node zombitronica_1.js",
+    "zombitronpolis": "node zombitronpolis.js"
   }
 }
