@@ -1,6 +1,6 @@
 # Zombitronpolis
 
-Zombitronpolis permet 
+Zombitronpolis permet  de jouer avec des polices de caractere
 
 > [Installation du serveur](https://github.com/noesya/zombitron.web) 
 (Remplacer ``zombitron.web`` par ``zombitronpolis`` dans les commandes)
