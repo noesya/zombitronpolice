@@ -9,6 +9,6 @@
     "socket.io": "^4.7.5"
   },
   "scripts": {
-    "start": "node index.js"
+    "zombitronica1": "node zombitronica_1.js"
   }
 }

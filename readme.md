@@ -1,38 +1,40 @@
 # Zombitronpolis
 
-new stuuff motion orientation: 
 
-Attentiooon pour utiliser ces types de capteurs il faut utiliser l'https: petite manip en plus détaillée juste en dessous. 
-Sinon tout pareil que pour les autres: 
+Zombitronica a plusieurs interfaces. 
 
-Capteur de mouvement 
-- Vitesse lineaire et angulaire // demo ici => `https://[ZOMBITRON_SERVEUR_IP]/devicemotion`
-- Orientation // demo ici => `https://[ZOMBITRON_SERVEUR_IP]/deviceorientation`
+La première est composée d'un séquenceur et de différents controlleurs.
 
-## Spécificité pour l'ajout de la gestion des capteurs: 
+##  Detail des instruments
 
+### le sequenceur > `http://[ZOMBITRON_SERVEUR_IP]/sequencer`
+4 instruments peuvent etre joués en sequence sur 8 temps
+il faut appuyer sur play pour le demarrer, et à nouveau sur play pour le mettre en pause
+![sequencer](docs/sequencer.png?raw=true "Sequenceur")
 
-Generer un certificat  https: 
-`sudo openssl req -x509 -nodes -days 365 -newkey rsa:4096 -keyout selfsigned.key -out selfsigned.crt`
-à placer à la racine du code. 
+### le controlleur >  `http://[ZOMBITRON_SERVEUR_IP]/controller`
+Le controlleur affiche trois jauges permettant de controller le son issu du sequenceur
+( de gauche a droite): 
+- le nombre de BPM du sequenceur
+- distortion
+- reverbe
+![Controlleur](docs/control.png?raw=true "Controlleur")
 
-Il faut changer le mode de permission des fichiers générés : 
-```
-  sudo chmod 755 selfsigned.crt
-  sudo chmod 755 selfsigned.key
-```
+### les effets > `http://[ZOMBITRON_SERVEUR_IP]/slider`
+4 sliders permettent de modifier une composante des instruments du sequenceur 
+Il faut jouer avec.
+![Sliders](docs/slide.png?raw=true "Sliders")
 
-IPHONE 
-Parfois : il faut activer la motion dans les parametres du telephone > safari
-
-Attention: c'est passé en https pour permettre l'usage des capteurs. (ca veut dire pas oublier le https dans l'url )
+### le traquePad > `http://[ZOMBITRON_SERVEUR_IP]/position`
+et le traquepad qui ajoute une delicatesse au tout avec sa jolie gamme pentatonique
+![Traquepad](docs/traque.png?raw=true "Traquepad")
 
 ## Setup serveur
 1. Choisir un vieil Android pour le transformer en serveur-zombitron.
 2. Installer [Termux](https://play.google.com/store/apps/details?id=com.termux) sur l'appareil
 3. Lancer Termux et installer node, git et yarn
   ```
-  pkg install node git yarn
+  pkg install nodejs git yarn
   ```
 4. Cloner le repo
   ```
@@ -40,12 +42,12 @@ Attention: c'est passé en https pour permettre l'usage des capteurs. (ca veut d
   ```
 5. Rentrer dans le dossier, installer les dépendances
   ```
-  cd zombitronpolis
-  yarn install
+  cd zombitronica
+  npm install
   ```
 6. Lancer le serveur
   ```
-  node zombitronpolis.js
+  npm run zombitronica1
   ```
 
 ## Mise à jour
