@@ -10,7 +10,7 @@ La première est composée d'un séquenceur et de différents controlleurs.
 ### le sequenceur > `http://[ZOMBITRON_SERVEUR_IP]/sequencer`
 4 instruments peuvent etre joués en sequence sur 8 temps
 il faut appuyer sur play pour le demarrer, et à nouveau sur play pour le mettre en pause
-![sequencer](assets/images/sequencer.png?raw=true "Sequenceur")
+![sequencer](docs/sequencer.png?raw=true "Sequenceur")
 
 ### le controlleur >  `http://[ZOMBITRON_SERVEUR_IP]/controller`
 Le controlleur affiche trois jauges permettant de controller le son issu du sequenceur
@@ -18,16 +18,16 @@ Le controlleur affiche trois jauges permettant de controller le son issu du sequ
 - le nombre de BPM du sequenceur
 - distortion
 - reverbe
-![Controlleur](assets/images/control.png?raw=true "Controlleur")
+![Controlleur](docs/control.png?raw=true "Controlleur")
 
 ### les effets > `http://[ZOMBITRON_SERVEUR_IP]/slider`
 4 sliders permettent de modifier une composante des instruments du sequenceur 
 Il faut jouer avec.
-![Sliders](assets/images/slide.png?raw=true "Sliders")
+![Sliders](docs/slide.png?raw=true "Sliders")
 
 ### le traquePad > `http://[ZOMBITRON_SERVEUR_IP]/position`
 et le traquepad qui ajoute une delicatesse au tout avec sa jolie gamme pentatonique
-![Traquepad](assets/images/traque.png?raw=true "Traquepad")
+![Traquepad](docs/traque.png?raw=true "Traquepad")
 
 ## Setup serveur
 1. Choisir un vieil Android pour le transformer en serveur-zombitron.
