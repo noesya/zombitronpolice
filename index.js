@@ -38,38 +38,38 @@ for (const name of Object.keys(nets)) {
 // });
 
 app.use('/scripts', express.static(__dirname + '/node_modules'));
-app.use('/fonts', express.static(__dirname + '/fonts'));
+app.use('/assets', express.static(__dirname + '/fonts'));
 
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/views/index.html');
 });
 
 app.get('/testorientation', function (req, res) {
-  res.sendFile(__dirname + '/testorientation.html');
+  res.sendFile(__dirname + '/views/testorientation.html');
 });
 
 app.get('/slider', function (req, res) {
-  res.sendFile(__dirname + '/slider.html');
+  res.sendFile(__dirname + '/views/slider.html');
 });
 
 app.get('/deviceorientation', function (req, res) {
-  res.sendFile(__dirname + '/deviceorientation.html');
+  res.sendFile(__dirname + '/views/deviceorientation.html');
 });
 
 app.get('/devicemotion', function (req, res) {
-  res.sendFile(__dirname + '/devicemotion.html');
+  res.sendFile(__dirname + '/views/devicemotion.html');
 });
 
 app.get('/sequencer', function (req, res) {
-  res.sendFile(__dirname + '/sequencer.html');
+  res.sendFile(__dirname + '/views/sequencer.html');
 });
 
 app.get('/position', function (req, res) {
-  res.sendFile(__dirname + '/position.html');
+  res.sendFile(__dirname + '/views/position.html');
 });
 
 app.get('/controller', function (req, res) {
-  res.sendFile(__dirname + '/controller.html');
+  res.sendFile(__dirname + '/views/controller2.html');
 });
 
 io.on('connection', (socket) => {

@@ -8,7 +8,7 @@
     <style>
         @font-face {
             font-family: 'BricolageGrotesque';
-            src: url('/fonts/BricolageGrotesque.ttf');
+            src: url('/assets/fonts/BricolageGrotesque.ttf');
         }
         body {
             background: white;
@@ -49,21 +49,7 @@
     let weight = 200
     let opsz = 12
 
-    socket.on('dial1', (data) => {
-        console.log('c le contrôleur 1', data);
-        updateStyle(data, weight, opsz);
-    });
-
-    socket.on('dial2', (data) => {
-        console.log('c le contrôleur 2', data)
-        updateStyle(width, data, opsz);
-    });
-
-    socket.on('dial3', (data) => {
-        console.log('c le contrôleur 3', data);
-        updateStyle(width, weight, data);
-    });
-
+    var alphastart = null;
     function updateStyle (twidth, tweight, topsz) {
         width = twidth
         weight = tweight
@@ -71,18 +57,20 @@
         text.style.fontVariationSettings = "'wdth' " + width + ", 'wght' "+ weight + ",'opsz'" + opsz;
     }
 
-    socket.on('dial4', (data) => {
-        console.log('c le contrôleur 4', data)
-        text.style.transform = 'skewX(' + data + 'deg)';
+    socket.on('orientation', (data) => {
+        if(!alphastart){
+            alphastart = data.alpha;
+        }
+
+        var deltaAlpha = Math.abs(data.alpha - alphastart);
+
+
+        var twidth = deltaAlpha / 360 * 25 + 75;
+        console.log(twidth);
+        var tweight = weight;
+        var topsz = opsz;
+        updateStyle (twidth, tweight, topsz)
+
     });
 
-    socket.on('dial5', (data) => {
-        console.log('c le contrôleur 5', data)
-        text
-        .style.fontSize = data + 'rem';
-    });
-
-    socket.on('dial-motion', (data) => {
-        text.style.transform = 'skewX(' + data.alpha + 'deg) skewY(' + data.beta + 'deg)';
-    });
 </script>
