@@ -38,10 +38,10 @@ for (const name of Object.keys(nets)) {
 // });
 
 app.use('/scripts', express.static(__dirname + '/node_modules'));
-app.use('/assets', express.static(__dirname + '/fonts'));
+app.use('/assets', express.static(__dirname + '/assets'));
 
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/views/index.html');
+  res.sendFile(__dirname + '/views/zombitronpolis.html');
 });
 
 app.get('/testorientation', function (req, res) {

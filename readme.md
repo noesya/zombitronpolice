@@ -45,7 +45,7 @@ Attention: c'est passé en https pour permettre l'usage des capteurs. (ca veut d
   ```
 6. Lancer le serveur
   ```
-  yarn start
+  node zombitronpolis.js
   ```
 
 ## Mise à jour
