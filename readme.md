@@ -1,9 +1,9 @@
-# Zombitronpolis
-
+# Zombitron
 
 Zombitronica a plusieurs interfaces. 
 
 La première est composée d'un séquenceur et de différents controlleurs.
+
 
 ##  Detail des instruments
 

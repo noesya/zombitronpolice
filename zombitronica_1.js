@@ -40,7 +40,7 @@ app.get('/position', function (req, res) {
 });
 
 app.get('/controller', function (req, res) {
-  res.sendFile(__dirname + '/views/controller.html');
+  res.sendFile(__dirname + '/views/potentiometers_3.html');
 });
 
 io.on('connection', (socket) => {
@@ -52,7 +52,7 @@ io.on('connection', (socket) => {
     io.emit('position', v);
   });
 
-    socket.on('dial1', (v) => {
+  socket.on('dial1', (v) => {
     io.emit('dial1', v);
   });
 

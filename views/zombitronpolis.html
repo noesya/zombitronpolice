@@ -1,88 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Zombitronpolis</title>
+        <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zombitronpolis</title>
-    <style>
-        @font-face {
-            font-family: 'BricolageGrotesque';
-            src: url('/assets/fonts/BricolageGrotesque.ttf');
-        }
-        body {
-            background: white;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            color: black;
-            font: 1em 'BricolageGrotesque';
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        #start {
-            padding: 10px;
-            font-size: 50px;
-            font-variation-settings: "wdth" 75, "wght" 200, "opsz" 12;
-            transform: skewX(0);
-        }
-    </style>
-</head>
-
-<body>
-    <div id="start">Bricolage</div>
-</body>
-
+    <body class="zombitronpolis">
+        <div id="start">Bricolage</div>
+        <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+        <script type="text/javascript" src="/assets/js/zombitronpolis.js"></script>
+    </body>
 </html>
-<script src="/socket.io/socket.io.js"></script>
-<script>
-    const socket = io();
-
-    const text = document.querySelector('#start');
-
-    let width = 75
-    let weight = 200
-    let opsz = 12
-
-    socket.on('dial1', (data) => {
-        console.log('c le contrôleur 1', data);
-        updateStyle(data, weight, opsz);
-    });
-
-    socket.on('dial2', (data) => {
-        console.log('c le contrôleur 2', data)
-        updateStyle(width, data, opsz);
-    });
-
-    socket.on('dial3', (data) => {
-        console.log('c le contrôleur 3', data);
-        updateStyle(width, weight, data);
-    });
-
-    function updateStyle (twidth, tweight, topsz) {
-        width = twidth
-        weight = tweight
-        opsz = topsz
-        text.style.fontVariationSettings = "'wdth' " + width + ", 'wght' "+ weight + ",'opsz'" + opsz;
-    }
-
-    socket.on('dial4', (data) => {
-        console.log('c le contrôleur 4', data)
-        text.style.transform = 'skewX(' + data + 'deg)';
-    });
-
-    socket.on('dial5', (data) => {
-        console.log('c le contrôleur 5', data)
-        text
-        .style.fontSize = data + 'rem';
-    });
-
-    socket.on('dial-motion', (data) => {
-        text.style.transform = 'skewX(' + data.alpha + 'deg) skewY(' + data.beta + 'deg)';
-    });
-</script>

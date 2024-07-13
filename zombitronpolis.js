@@ -44,43 +44,11 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + '/views/zombitronpolis.html');
 });
 
-app.get('/testorientation', function (req, res) {
-  res.sendFile(__dirname + '/views/testorientation.html');
-});
-
-app.get('/slider', function (req, res) {
-  res.sendFile(__dirname + '/views/slider.html');
-});
-
-app.get('/deviceorientation', function (req, res) {
-  res.sendFile(__dirname + '/views/deviceorientation.html');
-});
-
-app.get('/devicemotion', function (req, res) {
-  res.sendFile(__dirname + '/views/devicemotion.html');
-});
-
-app.get('/sequencer', function (req, res) {
-  res.sendFile(__dirname + '/views/sequencer.html');
-});
-
-app.get('/position', function (req, res) {
-  res.sendFile(__dirname + '/views/position.html');
-});
-
 app.get('/controller', function (req, res) {
-  res.sendFile(__dirname + '/views/controller2.html');
+  res.sendFile(__dirname + '/views/potentiometers_5.html');
 });
 
 io.on('connection', (socket) => {
-  socket.on('slider', (v) => {
-    io.emit('slider', v);
-  });
-
-  socket.on('position', (v) => {
-    io.emit('position', v);
-  });
-
   socket.on('dial1', (v) => {
     io.emit('dial1', v);
   });
@@ -103,30 +71,6 @@ io.on('connection', (socket) => {
 
   socket.on('dial-motion', (data) => {
     io.emit('dial-motion', data);
-  });
-
-  socket.on('sequencer', (v) => {
-    io.emit('sequencer', v);
-  });
-
-  socket.on('touche', (v) => {
-    // io.emit('sequencer', v);
-    console.log(v)
-  });
-
-  socket.on('acceleration', (v) => {
-    io.emit('acceleration', v);
-  });
-
-  socket.on('rotationrate', (v) => { // vitesse de rotation angulaire 
-    const p = {alpha: Math.round(v.alpha), beta: Math.round(v.beta), gamma:  Math.round(v.gamma) }
-    io.emit('rotationrate', p);
-  });
-
-  socket.on('orientation', (v) => { // orientation
-    console.log(v)
-    // const p = {alpha: Math.round(v.alpha), beta: Math.round(v.beta), gamma:  Math.round(v.gamma) }
-    io.emit('orientation', v);
   });
 });
 

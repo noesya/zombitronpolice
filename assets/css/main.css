@@ -1,3 +1,7 @@
+@font-face {
+    font-family: 'BricolageGrotesque';
+    src: url('/assets/fonts/BricolageGrotesque.ttf');
+}
 body {
     background: black;
     position: fixed;
@@ -22,4 +26,23 @@ body {
 
 .zombitronica__controller #content2 {
     
+}
+
+
+
+/* ZOMBITRONPOLIS */
+body.zombitronpolis {
+    background: white;
+    color: black;
+    font: 1em 'BricolageGrotesque';
+    align-items: center;
+    justify-content: center;
+
+}
+
+body.zombitronpolis #start {
+    padding: 10px;
+    font-size: 50px;
+    font-variation-settings: "wdth" 75, "wght" 200, "opsz" 12;
+    transform: skewX(0);
 }
