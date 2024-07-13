@@ -1,6 +1,10 @@
 # Zombitronica - Un Zombitron musical 
 (details pour setup le serveur en dessous)
 
+Zombitronica a plusieurs interfaces. 
+
+La première est composée d'un séquenceur et de différents controlleurs.
+
 ##  Detail des instruments
 
 ### le sequenceur > `http://[ZOMBITRON_SERVEUR_IP]/sequencer`
@@ -12,8 +16,8 @@ il faut appuyer sur play pour le demarrer, et à nouveau sur play pour le mettre
 Le controlleur affiche trois jauges permettant de controller le son issu du sequenceur
 ( de gauche a droite): 
 - le nombre de BPM du sequenceur
-- distowrzz
-- reverb erb  erb   erb 
+- distortion
+- reverbe
 ![Controlleur](assets/images/control.png?raw=true "Controlleur")
 
 ### les effets > `http://[ZOMBITRON_SERVEUR_IP]/slider`
@@ -39,11 +43,11 @@ et le traquepad qui ajoute une delicatesse au tout avec sa jolie gamme pentatoni
 5. Rentrer dans le dossier, installer les dépendances
   ```
   cd zombitronica
-  yarn install
+  npm install
   ```
 6. Lancer le serveur
   ```
-  yarn start
+  npm run zombitronica1
   ```
 7. Visiter les différents hacks avec d'autres vieux téléphones qui doivent être sur le même réseau ou sur le réseau du serveur-zombitron :
   - le controlleur : `http://[ZOMBITRON_SERVEUR_IP]/`
