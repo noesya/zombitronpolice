@@ -1,53 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {
-            background: black;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            color: white;
-            font: 1em sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            overflow: hidden;
-        }
-
-        h1 {
-            user-select: none;
-            pointer-events: none;
-        }
-    </style>
-</head>
-
-<body>
-    
-
-        <div id="content">
-            
-        </div>
-        <div id="content2">
-            
-        </div>
-        <div id="content3">
-            
-        </div>
-    
-</body>
-
-</html>
-
-<script src="/scripts/nexusui/dist/NexusUI.js"></script>
-<script src="/socket.io/socket.io.js"></script>
-<script>
     let dial1 = new Nexus.Dial('#content', {
         'size': [200, 200],
         'interaction': 'radial', // "radial", "vertical", or "horizontal"
@@ -93,4 +43,3 @@
     window.addEventListener("devicemotion", (event) => {
         console.log(event);
     });
-</script>

@@ -21,25 +21,26 @@ for (const name of Object.keys(nets)) {
 }
 
 app.use('/scripts', express.static(__dirname + '/node_modules'));
+app.use('/assets', express.static(__dirname + '/assets'));
 
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/music.html');
+  res.sendFile(__dirname + '/views/music.html');
 });
 
 app.get('/slider', function (req, res) {
-  res.sendFile(__dirname + '/slider.html');
+  res.sendFile(__dirname + '/views/slider.html');
 });
 
 app.get('/sequencer', function (req, res) {
-  res.sendFile(__dirname + '/sequencer.html');
+  res.sendFile(__dirname + '/views/sequencer.html');
 });
 
 app.get('/position', function (req, res) {
-  res.sendFile(__dirname + '/position.html');
+  res.sendFile(__dirname + '/views/position.html');
 });
 
 app.get('/controller', function (req, res) {
-  res.sendFile(__dirname + '/controller.html');
+  res.sendFile(__dirname + '/views/controller.html');
 });
 
 io.on('connection', (socket) => {

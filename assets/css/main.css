@@ -1,0 +1,25 @@
+body {
+    background: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: white;
+    font: 1em sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.zombitronica__controller #content {
+}
+
+.zombitronica__controller #content1 {
+    
+}
+
+.zombitronica__controller #content2 {
+    
+}
