@@ -1,5 +1,5 @@
-# Zombitronica - Un Zombitron musical 
-(details pour setup le serveur en dessous)
+# Zombitronpolis
+
 
 Zombitronica a plusieurs interfaces. 
 
@@ -38,7 +38,7 @@ et le traquepad qui ajoute une delicatesse au tout avec sa jolie gamme pentatoni
   ```
 4. Cloner le repo
   ```
-  git clone https://github.com/noesya/zombitronica
+  git clone https://github.com/noesya/zombitronpolis
   ```
 5. Rentrer dans le dossier, installer les dépendances
   ```
@@ -49,10 +49,6 @@ et le traquepad qui ajoute une delicatesse au tout avec sa jolie gamme pentatoni
   ```
   npm run zombitronica1
   ```
-7. Visiter les différents hacks avec d'autres vieux téléphones qui doivent être sur le même réseau ou sur le réseau du serveur-zombitron :
-  - le controlleur : `http://[ZOMBITRON_SERVEUR_IP]/`
-  - l'image : `http://[ZOMBITRON_SERVEUR_IP]/shader`
-  - l'audio : `http://[ZOMBITRON_SERVEUR_IP]/sound`
 
 ## Mise à jour
 

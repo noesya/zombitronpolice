@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background: black;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            color: white;
+            font: 1em sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        h1 {
+            user-select: none;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content"></div>
+</body>
+
+</html>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/scripts/nexusui/dist/NexusUI.js"></script>
+
+<script>
+    window.addEventListener("load", function () {
+        var socket = io();
+        document.addEventListener("click", function (e) { // touche initial pour activer le full screen ( si possible / pas dispo sur ios)
+            let elem = document.querySelector("#content");
+            if (!document.fullscreenElement) {
+                elem.requestFullscreen().catch((err) => {
+                    alert(
+                        `Error attempting to enable fullscreen mode: ${err.message} (${err.name})`,
+                    );
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }, { once: true })
+
+        window.addEventListener(
+            "deviceorientation",
+            function (event) {
+                // alpha : rotation autour de l'axe z
+                var rotateDegrees = event.alpha;
+                // gamma : de gauche à droite
+                var leftToRight = event.gamma;
+                // bêta : mouvement avant-arrière
+                var frontToBack = event.beta;
+                socket.emit('orientation', {alpha: event.alpha, beta: event.beta, gamma: event.gamma})
+            }
+        );
+    });
+</script>
